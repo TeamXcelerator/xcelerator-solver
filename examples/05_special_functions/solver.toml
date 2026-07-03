@@ -1,0 +1,33 @@
+# Example 5 — Special Functions
+#
+# Target formula: y = erf(x)
+# Demonstrates the error function operator 'erf' and the new special-function
+# vocabulary. The solver finds erf(x) at complexity 2 with MAPE near 0%.
+#
+# Note: MAPE at x=0 uses the absolute fallback (|actual| ≤ 1e-12) and
+# contributes 0% error when the predicted value is also 0.
+#
+# Run from this directory:
+#   xcelerator-solver solver.toml
+
+training_csv   = "data/train.csv"
+validation_csv = "data/val.csv"
+target_column  = "y"
+
+error_metric   = "mape"
+max_error_pct  = 1.0
+max_complexity = 5
+max_time_secs  = 15.0
+output_file    = "results.txt"
+top_candidates = 10
+max_threads    = 4
+
+[terms]
+variables = ["x"]
+constants = []
+
+[operators]
+binary = ["add", "multiply"]
+unary  = ["erf", "tanh", "exp", "negate"]
+# ^ tanh included alongside erf: both are S-shaped functions on [-1,1].
+# The solver will correctly prefer erf(x) (MAPE 0%) over tanh alternatives.

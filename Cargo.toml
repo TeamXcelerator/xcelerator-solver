@@ -1,0 +1,49 @@
+[package]
+name = "xcelerator-solver"
+version = "0.1.0"
+edition = "2021"
+authors = ["Ronnie Andrews, Jr. <5178942+TeamXceleratorDev@users.noreply.github.com>"]
+license-file = "LICENSE"
+readme = "README.md"
+repository = "https://github.com/TeamXcelerator/xcelerator-solver"
+description = "Deterministic, precision-configurable symbolic regression engine"
+keywords = ["symbolic-regression", "high-precision", "regression", "deterministic", "arbitrary-precision"]
+categories = ["science", "mathematics", "algorithms", "command-line-utilities", "artificial-intelligence"]
+
+[features]
+default = []
+hp = ["dep:rug"]
+
+# docs.rs builds in a network-isolated sandbox with no system packages, so it
+# cannot build the `hp` feature (requires libgmp-dev/libmpfr-dev/libmpc-dev).
+# Constrain the docs.rs build to the default feature set only.
+[package.metadata.docs.rs]
+features = []
+no-default-features = false
+
+[lib]
+name = "xcelerator_solver"
+path = "src/lib.rs"
+
+[[bin]]
+name = "xcelerator-solver"
+path = "src/main.rs"
+
+[dependencies]
+serde              = { version = "1.0", features = ["derive"] }
+serde_json         = "1.0"
+toml               = "0.8"
+libm               = "0.2"   # erf, tgamma, lgamma for f64 (stable, no std dependency)
+csv                = "1"
+clap               = { version = "4", features = ["derive"] }
+rayon              = "1.10"
+crossbeam-channel  = "0.5"
+chrono             = "0.4"
+rug                = { version = "1.30", default-features = false, features = ["float"], optional = true }
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.release]
+opt-level = 3
+lto = "thin"

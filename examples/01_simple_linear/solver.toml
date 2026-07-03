@@ -1,0 +1,26 @@
+# Example 1 — Simple Linear
+#
+# Target formula: y = 2 * x + 1
+# The solver finds this at complexity 3 with MAPE = 0%.
+#
+# Run from this directory:
+#   xcelerator-solver solver.toml
+
+training_csv   = "data/train.csv"
+validation_csv = "data/val.csv"
+target_column  = "y"
+
+max_error_pct  = 1.0     # accept any formula within 1% MAPE
+max_complexity = 5       # search up to 5-node expressions
+max_time_secs  = 15.0
+output_file    = "results.txt"
+top_candidates = 10
+max_threads    = 4
+
+[terms]
+variables = ["x"]
+constants = ["1", "2"]
+
+[operators]
+binary = ["add", "multiply"]
+unary  = []

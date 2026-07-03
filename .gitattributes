@@ -1,0 +1,18 @@
+# Normalize line endings: store as LF in the repo; git converts on checkout.
+# This prevents CRLF-vs-LF noise in diffs and patches on Windows.
+
+# Rust / TOML / Markdown / Python / CSV — normalize to LF.
+*.rs    text eol=lf
+*.toml  text eol=lf
+*.md    text eol=lf
+*.py    text eol=lf
+*.csv   text eol=lf
+*.json  text eol=lf
+*.sh    text eol=lf
+*.txt   text eol=lf
+
+# Lock file — text but don't force eol (Cargo manages it).
+Cargo.lock text
+
+# Compiled / binary outputs — never normalize.
+*.pdf   binary

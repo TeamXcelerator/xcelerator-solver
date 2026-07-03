@@ -1,0 +1,6 @@
+/target/
+out_test.txt
+smoke/results.txt
+results.txt
+make_train.ps1
+.kiro/

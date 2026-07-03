@@ -1,0 +1,27 @@
+# Example 2 — Quadratic
+#
+# Target formula: y = x^2 + 3
+# Uses the `squared` unary operator (x^2 = squared(x)).
+# The solver finds this at complexity 3 with MAPE = 0%.
+#
+# Run from this directory:
+#   xcelerator-solver solver.toml
+
+training_csv   = "data/train.csv"
+validation_csv = "data/val.csv"
+target_column  = "y"
+
+max_error_pct  = 1.0
+max_complexity = 5
+max_time_secs  = 15.0
+output_file    = "results.txt"
+top_candidates = 10
+max_threads    = 4
+
+[terms]
+variables = ["x"]
+constants = ["3"]
+
+[operators]
+binary = ["add"]
+unary  = ["squared"]

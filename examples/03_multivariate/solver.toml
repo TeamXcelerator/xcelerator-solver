@@ -1,0 +1,32 @@
+# Example 3 — Multivariate
+#
+# Target formula: y = a * b
+# Demonstrates two-variable search. No constants needed.
+# The solver finds this at complexity 3 with MAPE = 0%.
+#
+# Uses MAE instead of MAPE to show the alternative metric:
+# MAPE can behave poorly when target values span a wide range or
+# are near zero; MAE is a safe default for such data.
+#
+# Run from this directory:
+#   xcelerator-solver solver.toml
+
+training_csv   = "data/train.csv"
+validation_csv = "data/val.csv"
+target_column  = "y"
+
+error_metric   = "mae"   # mean absolute error; threshold is in target units
+max_error_pct  = 0.1     # accept formulas with MAE ≤ 0.1 (target units)
+max_complexity = 5
+max_time_secs  = 15.0
+output_file    = "results.txt"
+top_candidates = 10
+max_threads    = 4
+
+[terms]
+variables = ["a", "b"]
+constants = []
+
+[operators]
+binary = ["add", "multiply"]
+unary  = []
